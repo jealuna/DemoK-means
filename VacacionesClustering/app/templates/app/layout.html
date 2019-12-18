@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - My Django Application</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+</head>
+<body>
+
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3>
+                        Días disponibles
+                    </h3>
+                </div>
+                {% block sideBar%}{% endblock %}
+
+            </nav>
+
+            <!-- Page Content Holder -->
+            <div id="content">
+
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+
+                        <div class="navbar-header">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                                <i class="glyphicon glyphicon-align-left"></i>
+                                <span></span>
+                            </button>
+                        </div>
+                        <center><h3>Planea tus Vacaciones</h3></center>
+                        <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#">Page</a></li>
+                                <li><a href="#">Page</a></li>
+                                <li><a href="#">Page</a></li>
+                                <li><a href="#">Page</a></li>
+                            </ul>
+                        </div>-->
+                    </div>
+                </nav>
+                {% block content %}{% endblock %}
+            </div>
+        </div>    
+    <!--<script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
+    <script src="{% static 'app/scripts/respond.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+{% block scripts %}{% endblock %}
+
+</body>
+</html>
