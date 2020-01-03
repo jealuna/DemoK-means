@@ -18,16 +18,7 @@ class LugarViewSet(ModelViewSet):
                 kwargs["many"] = True
         return super(ModelViewSet, self).get_serializer(*args, **kwargs)
     
-#    def get_serializer_context(self):
-#       context = super().get_serializer_context()
-#        context['clusters'] = 1
-#        return context
-    #def perform_create(self, serializer):
-    #    #game = self.request.data
-    #    print(serializer)
     def create(self, request, *args, **kwargs):
-    #    print(1+1)
-        #, context={'request': request}
         serializer = self.get_serializer(data=request.data)
         if (serializer.is_valid(raise_exception=True)):
             columnas = ['Longitud', 'Latitud', 'Nombre']
@@ -35,7 +26,6 @@ class LugarViewSet(ModelViewSet):
             idx = 0
             clusters = 0
             for modelo in serializer.validated_data:
-                #print(modelo)
                 longitud = modelo['longitud']
                 latitud = modelo['latitud']
                 nombre = modelo['nombre']
@@ -45,12 +35,6 @@ class LugarViewSet(ModelViewSet):
             if clusters > len(coordenadas_df.index):
                 raise serializers.ValidationError('El número de clústers debe ser menor o igual al número de puntos')
             cluster, centros = agrupa(coordenadas_df, clusters)
-            #grafica_cluster(cluster, centros)
             print(cluster)
             json = cluster.to_json(orient='records', force_ascii=False)
-        ##write_serializer.is_valid(raise_exception=True)
-        ##instance = self.perform_create(write_serializer)
-
-        ##read_serializer = OrderListSerializer(instance)
         return Response(json)
-        ##return Response(read_serializer.data)

@@ -5,6 +5,16 @@ import numpy as np
 from sklearn.cluster import KMeans 
 
 def agrupa(coordenadas, numero):
+    """
+    Realiza el clustering de un conjuto de coordenadas usando k-means
+
+    Args:
+        coordenadas (DataFrame): DataFrame de pandas con las coordenadas
+        numero (int): Numero de clusters
+    Returns:
+        DataFrame: Dataframe con las coordenadas contenidas en el archivo
+        ndarray: Coordenadas de los centros de los clústers
+    """
     kmeans_1 = KMeans(n_clusters=numero)
     X = coordenadas[['Longitud','Latitud']].values
     predicciones = kmeans_1.fit_predict(X)
