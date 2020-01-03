@@ -11,8 +11,8 @@ var osmUrl = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
 // Se inicializa el mapa con Mexico como centro y un zoom de 5
 var map = L.map('map').setView([19.3911668, -99.423815], 5).addLayer(osm), geocoder = L.Control.Geocoder.nominatim();
 
-// Se maneja el click en el mapa
-map.on('click', onMapClick);
+// Se maneja el doble click en el mapa
+map.on('dblclick', onMapClick);
 
 // Script for adding marker on map click
 function onMapClick(e) {
@@ -60,7 +60,6 @@ function getAllMarkers() {
     var allMarkersGeoJsonArray = [];
     var content = [];
     clusters = $("#clusters").val();
-
     $.each(map._layers, function (ml) {
         if (map._layers[ml].feature) {
             var modelo = {
@@ -72,6 +71,13 @@ function getAllMarkers() {
             content.push(modelo);
             allMarkersObjArray.push(this);
             allMarkersGeoJsonArray.push(JSON.stringify(this.toGeoJSON()));
+        }
+    });
+
+    var features = [];
+    map.eachLayer(function (layer) {
+        if (layer instanceof L.Marker) {
+            features.push(layer.feature);
         }
     });
 
@@ -98,6 +104,9 @@ function getAllMarkers() {
                 creaMarcador(resultado[index], agrupacion);
                 $('#cluster' + agrupacion).append('<li>' + resultado[index].Nombre + '</li>')
             });
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(JSON.stringify(jqXHR.responseJSON));
         }
     });
 }

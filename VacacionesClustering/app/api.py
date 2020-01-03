@@ -1,10 +1,11 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.response import Response
+from rest_framework import serializers
+import pandas as pd
 from .serializers import LugarSerializer
 from .models import Lugar
 from app.services.clasificacion import agrupa
 from app.services.visualizacion import grafica_cluster
-from rest_framework.response import Response
-import pandas as pd
 
 class LugarViewSet(ModelViewSet):
     queryset = Lugar.objects.all()
@@ -41,6 +42,8 @@ class LugarViewSet(ModelViewSet):
                 coordenadas_df.loc[idx] = [longitud, latitud, nombre]
                 idx = idx + 1
                 clusters = modelo['clusters']
+            if clusters > len(coordenadas_df.index):
+                raise serializers.ValidationError('El número de clústers debe ser menor o igual al número de puntos')
             cluster, centros = agrupa(coordenadas_df, clusters)
             #grafica_cluster(cluster, centros)
             print(cluster)
