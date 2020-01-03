@@ -9,7 +9,7 @@ class Lugar(models.Model):
     latitud = models.FloatField()
     longitud = models.FloatField()
     nombre = models.TextField()
-    clusters = models.IntegerField()
+    clusters = models.PositiveIntegerField()
  
     def __str__(self):
         return f'{self.nombre}'

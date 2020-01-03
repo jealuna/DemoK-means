@@ -79,6 +79,7 @@
     <Content Include="app\services\doc-checkpoint.kml" />
     <Content Include="app\static\app\content\leaflet.knreise-markers.css" />
     <Content Include="app\static\app\scripts\leaflet.knreise-markers.js" />
+    <Content Include="app\static\app\scripts\mapa.js" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />

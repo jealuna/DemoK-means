@@ -12,7 +12,7 @@ def agrupa(coordenadas, numero):
     agrupado.drop('index', axis=1, inplace=True)
     condiciones = []
     dias = []
-    for cluster in range(10):
+    for cluster in range(numero):
         condiciones.append(agrupado['Cluster'] == cluster)
         dias.append('Día ' + str(cluster+1))
     agrupado['DiadeVacaciones'] = np.select(condiciones, dias, default='black')
