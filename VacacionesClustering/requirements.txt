@@ -5,7 +5,7 @@ pytz==2019.3
 setuptools==44.0.0
 beautifulsoup4==4.8.2
 cycler==0.10.0
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 joblib==0.14.1
 kiwisolver==1.1.0
 matplotlib==3.1.2
